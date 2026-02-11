@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankArchiveMVP.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace BankArchiveMVP.Domain.Entities
         public Guid DocumentId { get; set; }
 
         public string? Text { get; set; }
-        public string TextStatus { get; set; } = "Pending";   // Pending | Ready | Failed
-        public string TextSource { get; set; } = "OCR";       // OCR | Manual
+        public OcrStatus TextStatus { get; set; } = OcrStatus.Pending;
+        public TextSource TextSource { get; set; } = TextSource.OCR;
 
         public DateTime? ProcessedAt { get; set; }
+
+        public Document Document { get; set; } = null!;
+
     }
 }

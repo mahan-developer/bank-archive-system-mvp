@@ -17,5 +17,7 @@ namespace BankArchiveMVP.Domain.Entities
         public string? Address { get; set; }
         public string Status { get; set; } = "Active";
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public ICollection<Case> Cases { get; set; } = new List<Case>();
     }
 }

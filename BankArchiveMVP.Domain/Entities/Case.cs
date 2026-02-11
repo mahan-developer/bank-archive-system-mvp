@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankArchiveMVP.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,14 @@ namespace BankArchiveMVP.Domain.Entities
         public Guid CustomerId { get; set; }
 
         public string CaseNo { get; set; } = null!;
-        public string CaseType { get; set; } = null!;
-        public string CaseStatus { get; set; } = "Open";
+        public CaseType CaseType { get; set; }
+        public CaseStatus CaseStatus { get; set; } = CaseStatus.Open;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? LastUpdate { get; set; }
+
+        public Customer Customer { get; set; } = null!;
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
+
     }
 }

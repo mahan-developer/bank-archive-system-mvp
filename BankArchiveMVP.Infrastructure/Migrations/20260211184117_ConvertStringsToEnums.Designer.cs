@@ -4,6 +4,7 @@ using BankArchiveMVP.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankArchiveMVP.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260211184117_ConvertStringsToEnums")]
+    partial class ConvertStringsToEnums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,50 +208,29 @@ namespace BankArchiveMVP.Infrastructure.Migrations
 
             modelBuilder.Entity("BankArchiveMVP.Domain.Entities.Case", b =>
                 {
-                    b.HasOne("BankArchiveMVP.Domain.Entities.Customer", "Customer")
-                        .WithMany("Cases")
+                    b.HasOne("BankArchiveMVP.Domain.Entities.Customer", null)
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("BankArchiveMVP.Domain.Entities.Document", b =>
                 {
-                    b.HasOne("BankArchiveMVP.Domain.Entities.Case", "Case")
-                        .WithMany("Documents")
+                    b.HasOne("BankArchiveMVP.Domain.Entities.Case", null)
+                        .WithMany()
                         .HasForeignKey("CaseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Case");
                 });
 
             modelBuilder.Entity("BankArchiveMVP.Domain.Entities.DocumentIndex", b =>
                 {
-                    b.HasOne("BankArchiveMVP.Domain.Entities.Document", "Document")
-                        .WithOne("DocumentIndex")
+                    b.HasOne("BankArchiveMVP.Domain.Entities.Document", null)
+                        .WithOne()
                         .HasForeignKey("BankArchiveMVP.Domain.Entities.DocumentIndex", "DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Document");
-                });
-
-            modelBuilder.Entity("BankArchiveMVP.Domain.Entities.Case", b =>
-                {
-                    b.Navigation("Documents");
-                });
-
-            modelBuilder.Entity("BankArchiveMVP.Domain.Entities.Customer", b =>
-                {
-                    b.Navigation("Cases");
-                });
-
-            modelBuilder.Entity("BankArchiveMVP.Domain.Entities.Document", b =>
-                {
-                    b.Navigation("DocumentIndex");
                 });
 #pragma warning restore 612, 618
         }

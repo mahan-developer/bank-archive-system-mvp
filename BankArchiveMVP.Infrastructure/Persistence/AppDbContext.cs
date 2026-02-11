@@ -36,35 +36,36 @@ namespace BankArchiveMVP.Infrastructure.Persistence
                 .IsUnique();
 
             modelBuilder.Entity<Case>()
-                .HasOne<Customer>()
-                .WithMany()
-                .HasForeignKey(x => x.CustomerId)
+                .HasOne(c => c.Customer)
+                .WithMany(cu => cu.Cases)
+                .HasForeignKey(c => c.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Documents
             modelBuilder.Entity<Document>()
-                .HasIndex(x => new { x.CaseId, x.FileHash })
+                .HasIndex(d => new { d.CaseId, d.FileHash })
                 .IsUnique();
 
             modelBuilder.Entity<Document>()
-                .HasOne<Case>()
-                .WithMany()
-                .HasForeignKey(x => x.CaseId)
+                .HasOne(d => d.Case)
+                .WithMany(c => c.Documents)
+                .HasForeignKey(d => d.CaseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // DocumentIndex (1:1)
-            modelBuilder.Entity<DocumentIndex>()
-                .HasOne<Document>()
-                .WithOne()
-                .HasForeignKey<DocumentIndex>(x => x.DocumentId)
+            // DocumentIndex (1:1) - مشخص کردن dependent با FK
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.DocumentIndex)
+                .WithOne(i => i.Document)
+                .HasForeignKey<DocumentIndex>(i => i.DocumentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // AuditLogs index
             modelBuilder.Entity<AuditLog>()
-                .HasIndex(x => new { x.EntityType, x.EntityId, x.CreatedAt });
+                .HasIndex(a => new { a.EntityType, a.EntityId, a.CreatedAt });
 
             base.OnModelCreating(modelBuilder);
         }
+
 
     }
 }
