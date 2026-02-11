@@ -9,9 +9,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BankArchiveMVP.Application\BankArchiveMVP.Application.csproj" />
     <ProjectReference Include="..\BankArchiveMVP.Domain\BankArchiveMVP.Domain.csproj" />
     <ProjectReference Include="..\BankArchiveMVP.Infrastructure\BankArchiveMVP.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
