@@ -12,6 +12,7 @@ namespace BankArchiveMVP.Domain.Entities
         public string CustomerNo { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
+        public string? NationalId { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Address { get; set; }

@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankArchiveMVP.Application\BankArchiveMVP.Application.csproj" />
     <ProjectReference Include="..\BankArchiveMVP.Domain\BankArchiveMVP.Domain.csproj" />
+	<ProjectReference Include="..\BankArchiveMVP.Application\BankArchiveMVP.Application.csproj" />
   </ItemGroup>
 
 </Project>
